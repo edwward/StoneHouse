@@ -1,0 +1,47 @@
+﻿
+<!-- model ktery tento view pouziva -->
+
+@model IEnumerable<StoneHouse.Models.ProductTypes>
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Product Type List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Product Type</a>
+    </div>
+</div>
+
+<br />
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(m => m.Name)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        <!-- pro kazdy produkt v producttypes -->
+        @foreach (var item in Model)
+        {
+            <!-- vytvor tabulku -->
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => item.Name)
+                </td>
+                <td>
+         <!-- pouzit partial view pro zobrazeni buttonu, id obdrzi partial view jako int a pak tento int(id) pridava do URL redirectu -->
+                    <partial name="_TableButtonPartial" model="item.Id" />
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
