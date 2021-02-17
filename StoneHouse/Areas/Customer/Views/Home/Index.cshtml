@@ -1,3 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<!--Protoze v homecontrolleru vracim list produktu, musim i zde pouzit list-->
+@model List<StoneHouse.Models.Products>
+
+<br />
+<br />
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <!--popis k produktum-->
+        <div class="col-sm-4">
+            <div class="card mb-5">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <label style="font-size:23px;color:steelblue;">@product.Name</label>
+                    </h4>
+                </div>
+                <!--zde pridavam images k produktum-->
+                <img class="card-img-top" style="height: 100%; width: 100%;" src="@product.Image" alt="Card Image" />
+                <!--cena a details-->
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <label style="font-size:20px; color:#a51313"><b>$@product.Price</b>/sq.ft</label>
+                        </div>
+                        <a asp-action="Details" asp-controller="Home" class="btn btn-outline-primary pull-right btn-outline-info" asp-route-id="@product.Id">View Details</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+</div>

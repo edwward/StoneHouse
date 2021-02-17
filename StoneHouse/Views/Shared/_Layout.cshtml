@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using StoneHouse.Extensions
+@using StoneHouse.Utility
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -23,6 +28,30 @@
                         <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product Types</a></li>
                         <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special Tags</a></li>
                         <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a></li>
+                        <!--zobraz session pokud je k dispozici-->
+                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+                        {
+                            <li style="color:white">
+                                <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                                    <i class="fas fa-shopping-cart"></i> &nbsp;
+                                    @{
+                                        <!--kolik je kosiku produktu-->
+                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
+                                    }
+                                    <!--display count-->
+                                    (@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li style="color:white">
+                                <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                                    <i class="fas fa-shopping-cart"></i> &nbsp;
+                                   (0)
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
