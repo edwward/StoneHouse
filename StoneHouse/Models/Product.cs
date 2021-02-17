@@ -25,12 +25,14 @@ namespace StoneHouse.Models
         public int ProductTypeId { get; set; }
 
         [ForeignKey("ProductTypeId")]       //zde foreign key pouzivam
+        [Display(Name = "Product Type")]
         public virtual ProductTypes ProductTypes { get; set; }  //virtual property pro ProductTypes (jina trida/model), virtual p. nebude pridana do Db, je pouze jako odkaz pro foreign key
 
-        [Display(Name = "Speical Tag")]     //to same jako vyse, akorat jiny foreign key
+        [Display(Name = "Special Tag")]     //to same jako vyse, akorat jiny foreign key
         public int SpecialTagsID { get; set; }
 
         [ForeignKey("SpecialTagsID")]
+        [Display(Name = "Special Tag")]
         public virtual SpecialTags SpecialTags { get; set; }
     }
 }
