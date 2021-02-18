@@ -9,5 +9,7 @@ namespace StoneHouse.Utility
     {
         public const string DefaultProductImage = "default.jpg";
         public const string ImageFolder = @"images\ProductImage";
+        public const string AdminEndUser = "Admin";
+        public const string SuperAdminEndUser = "Super Admin";
     }
 }

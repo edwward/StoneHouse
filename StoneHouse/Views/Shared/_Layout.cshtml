@@ -11,6 +11,8 @@
     <title>@ViewData["Title"] - StoneHouse</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css" />
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 <body>
@@ -33,7 +35,7 @@
                         {
                             <li style="color:white">
                                 <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
-                                    <i class="fas fa-shopping-cart"></i> &nbsp;
+                                    <i class="fas fa-shopping-cart fa-lg ml-3"></i> &nbsp;
                                     @{
                                         <!--kolik je kosiku produktu-->
                                         var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
@@ -47,8 +49,8 @@
                         {
                             <li style="color:white">
                                 <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
-                                    <i class="fas fa-shopping-cart"></i> &nbsp;
-                                   (0)
+                                    <i class="fas fa-shopping-cart fa-lg ml-3"></i> &nbsp;
+                                    (0)
                                 </a>
                             </li>
                         }
@@ -71,6 +73,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
