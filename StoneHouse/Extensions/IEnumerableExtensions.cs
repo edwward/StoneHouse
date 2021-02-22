@@ -26,6 +26,7 @@ namespace StoneHouse.Extensions
             {
                 selectedValue = "";
             }
+
             return from item in items
                    select new SelectListItem
                    {
@@ -33,6 +34,8 @@ namespace StoneHouse.Extensions
                        Value = item.GetPropertyValue("Id"),
                        Selected = item.GetPropertyValue("Id").Equals(selectedValue.ToString())
                    };
+
+
         }
     }
 }

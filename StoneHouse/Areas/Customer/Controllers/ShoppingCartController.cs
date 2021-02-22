@@ -33,6 +33,10 @@ namespace StoneHouse.Areas.Customer.Controllers
         public async Task<IActionResult> Index()
         {
             List<int> lstShoppingCart = HttpContext.Session.Get<List<int>>("ssShoppingCart");  //retrieve all items from shoppingcart session
+            if (lstShoppingCart == null)
+            {
+                return View(ShoppingCartVM);
+            }
             if (lstShoppingCart.Count > 0)
             {
                 foreach (int cartItem in lstShoppingCart)
@@ -55,7 +59,7 @@ namespace StoneHouse.Areas.Customer.Controllers
             ShoppingCartVM.Appointments.AppointmentDate = ShoppingCartVM.Appointments.AppointmentDate       //merge app.time and app.date to appointment itself (AppointmentDate)
                                                             .AddHours(ShoppingCartVM.Appointments.AppointmentTime.Hour)
                                                             .AddMinutes(ShoppingCartVM.Appointments.AppointmentTime.Minute);
-                                                            
+
 
             Appointments appointments = ShoppingCartVM.Appointments;  //save to appointments object
             this.db.Appointments.Add(appointments);

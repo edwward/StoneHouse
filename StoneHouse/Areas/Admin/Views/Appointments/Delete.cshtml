@@ -3,13 +3,13 @@
 @using StoneHouse.Utility
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Delete";
 }
 
 <br />
-<h2 class="text-info">Edit Appointment</h2>
+<h2 class="text-info">Delete Appointment</h2>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post">
     <div class="p-4 border rounded row">
         <input hidden asp-for="Appointment.Id" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -19,45 +19,40 @@
                     <label asp-for="Appointment.CustomerName"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.CustomerName" class="form-control" />
+                    <input asp-for="Appointment.CustomerName" readonly class="form-control" />
                 </div>
-                <span asp-validation-for="Appointment.CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="Appointment.CustomerEmail"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.CustomerEmail" class="form-control" />
+                    <input asp-for="Appointment.CustomerEmail" readonly class="form-control" />
                 </div>
-                <span asp-validation-for="Appointment.CustomerEmail" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="Appointment.AppointmentDate"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.AppointmentDate" id="datepicker" type="text" class="form-control" />
+                    <input asp-for="Appointment.AppointmentDate" readonly id="datepicker" type="text" class="form-control" />
                 </div>
-                <span asp-validation-for="Appointment.AppointmentDate" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="Appointment.AppointmentTime"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.AppointmentTime" id="timepicker" type="text" class="timepicker form-control" />
+                    <input asp-for="Appointment.AppointmentTime" id="timepicker" readonly type="text" class="timepicker form-control" />
                 </div>
-                <span asp-validation-for="Appointment.AppointmentTime" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="Appointment.CustomerPhoneNumber"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.CustomerPhoneNumber" class="form-control" />
+                    <input asp-for="Appointment.CustomerPhoneNumber" readonly class="form-control" />
                 </div>
-                <span asp-validation-for="Appointment.CustomerPhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-4">
@@ -72,8 +67,7 @@
                     }
                     else
                     {
-                        <select asp-for="@Model.Appointment.SalesPersonId" asp-items="Model.SalesPerson.ToSelectListItemString(Model.Appointment.SalesPersonId)" class="form-control"></select>
-
+                        <select asp-for="@Model.Appointment.SalesPersonId" disabled asp-items="Model.SalesPerson.ToSelectListItemString(Model.Appointment.SalesPersonId)" class="form-control"></select>
                     }
                 </div>
 
@@ -83,7 +77,7 @@
                     <label asp-for="Appointment.isConfirmed"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.isConfirmed" class="form-control" />
+                    <input asp-for="Appointment.isConfirmed" readonly class="form-control" />
                 </div>
             </div>
 
@@ -97,33 +91,17 @@
 
         <br />
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Update" />
+            <input type="submit" class="btn btn-danger" asp-route-id="@Model.Appointment.Id" value="Delete" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>
 </form>
 
+
 @section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script>
-        $('.timepicker').timepicker({
-            timeFormat: 'h:mm p',
-            interval: 30,
-            minTime: '10',
-            maxTime: '3:00pm',
-            startTime: '10:00',
-            dynamic: true,
-            dropdown: true,
-            scrollbar: true
-        });
-        $(function () {
-            $("#datepicker").datepicker({
-                minDate: +1, maxDate: "+3M"
-            });
-        });
-
-        $(document).ready(function () {
+    <script>
+       $(document).ready(function () {
             var appointmentTime = document.getElementById('datepicker').value;
             var splitData = "";
             if (appointmentTime.indexOf(" ") > 0) {
@@ -140,5 +118,5 @@
             $('#datepicker').attr('value', splitData[0]);
             $('#timepicker').attr('value', time + ' ' + amPmTime);
         });
-</script>
-}
+    </script>
+} 
