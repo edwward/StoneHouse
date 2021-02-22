@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.Internal;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace StoneHouse.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]       //tento controller muze pouzivat pouze superadmin
     //ProductsController bude uzivat ProductsViewModel
     [Area("Admin")]
     public class ProductsController : Controller

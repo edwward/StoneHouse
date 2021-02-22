@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoneHouse.Data;
 using StoneHouse.Models;
+using StoneHouse.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace StoneHouse.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]       //tento controller muze pouzivat pouze superadmin
     [Area("Admin")]
     public class ProductTypesController : Controller
     {

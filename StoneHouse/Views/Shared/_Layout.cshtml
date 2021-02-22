@@ -27,34 +27,47 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product Types</a></li>
-                        <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special Tags</a></li>
-                        <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a></li>
-                        <!--zobraz session pokud je k dispozici-->
-                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+                        @if (!User.IsInRole(SD.SuperAdminEndUser))
                         {
-                            <li style="color:white">
-                                <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
-                                    <i class="fas fa-shopping-cart fa-lg ml-3"></i> &nbsp;
-                                    @{
-                                        <!--kolik je kosiku produktu-->
-                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
-                                    }
-                                    <!--display count-->
-                                    (@count)
-                                </a>
-                            </li>
+                            <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a></li>
                         }
-                        else
+                        <!--navbar se zobrazi pouze superadminovi, ostatni jej videt nemusi-->
+                        @if (User.IsInRole(SD.SuperAdminEndUser))
                         {
-                            <li style="color:white">
-                                <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
-                                    <i class="fas fa-shopping-cart fa-lg ml-3"></i> &nbsp;
-                                    (0)
-                                </a>
-                            </li>
+                            <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product Types</a></li>
+                            <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special Tags</a></li>
+                            <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a></li>
+                            <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin Users</a></li>
                         }
-                    </ul>
+                        @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+                        {
+                            <li class="nav-item"><a class="nav-link text-white font-weight-lighter" asp-area="Admin" asp-controller="Appointments" asp-action="Index">Appointments</a></li>
+                        }
+                            <!--zobraz session pokud je k dispozici-->
+                            @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+                            {
+                                <li style="color:white">
+                                    <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                                        <i class="fas fa-shopping-cart fa-lg ml-3"></i> &nbsp;
+                                        @{
+                                            <!--kolik je kosiku produktu-->
+                                            var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
+                                        }
+                                        <!--display count-->
+                                        (@count)
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li style="color:white">
+                                    <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                                        <i class="fas fa-shopping-cart fa-lg ml-3"></i> &nbsp;
+                                        (0)
+                                    </a>
+                                </li>
+                            }
+                        </ul>
                 </div>
             </div>
         </nav>
