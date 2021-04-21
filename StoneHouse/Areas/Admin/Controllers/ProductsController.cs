@@ -31,7 +31,7 @@ namespace StoneHouse.Controllers
             this.db = db;
             this.hostingEnvironment = hostingEnvironment;
 
-            ProductsVM = new ProductsViewModel()
+            ProductsVM = new ProductsViewModel
             {
                 ProductTypes = this.db.ProductTypes.ToList(),
                 SpecialTags = this.db.SpecialTags.ToList(),
